@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Notizen</title>
+  <meta name="description" content="Notebook">
+  <meta name="theme-color" content="#0071c5">
+  <link rel="stylesheet" href="css/notebook.css" type="text/css" media="screen" charset="utf-8">  
+  <link rel="manifest" href="manifest.json">
+  <link rel="shortcut icon" sizes="192x192" href="images/app-icon-192.png">  
+</head>
+
+<body>
+    <div class="container">
+      <p>
+        <label for="new-task">Notize hinzufügen</label><input id="new-task" type="text"><button>Hinzufügen</button>
+      </p>
+      
+      <h3>Todo</h3>
+      <ul id="incomplete-tasks">
+        <li><input type="checkbox"><label>Pillen nehmen</label><input type="text"><button class="edit">Bearbeiten</button><button class="delete">Löschen</button></li>
+        <li><input type="checkbox"><label>Rennen</label><input type="text"><button class="edit">Bearbeiten</button><button class="delete">Löschen</button></li>
+      </ul>
+      
+      <h3>Fertig</h3>
+      <ul id="completed-tasks">
+        <li><input type="checkbox" checked><label>Meinen Arzt besuchen</label><input type="text"><button class="edit">Bearbeiten</button><button class="delete">Löschen</button></li>
+      </ul>
+    </div>
+
+  <script type="text/javascript" src="js/notebook.js"></script>
+  
+  <script>
+    // Service worker
+    if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                    navigator.serviceWorker.register('sw.js').then(function(registration) {
+                    }, function(err) {
+                    console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+    }
+  </script>
+</body>
+</html>

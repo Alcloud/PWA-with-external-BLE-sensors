@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Health Notebook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+  <meta name="description" content="My-Health-Notebook">
+  <meta name="theme-color" content="#0071c5">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="shortcut icon" sizes="192x192" href="images/app-icon-192.png">
+
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+
+  <!-- Polymer components -->
+  <link rel="import" href="bower_components/paper-button/paper-button.html">
+  <link rel="import" href="bower_components/paper-card/paper-card.html">
+  <link rel="import" href="bower_components/paper-dialog/paper-dialog.html">
+  <link rel="import" href="bower_components/paper-input/paper-input.html">
+  <link rel="import" href="bower_components/paper-progress/paper-progress.html">  
+  
+  <link rel="import" href="bower_components/paper-styles/color.html">
+  <link rel="stylesheet" href="bower_components/paper-styles/demo.css">
+</head>
+<body>
+    <div class="container">
+      <h1>FORSCHUNGSPROJEKT TEIL B</h1>
+      <h3>HTW 2019</h3>
+      <h2>Iteration Schritt 3</h2>
+      <div id="cards">
+                <paper-button id="connectButton" onclick="location.href='notebook.html';" raised class="colorful">Notizen</paper-button>
+                <paper-button id="connectButton" onclick="location.href='accelerometer.html';" raised class="colorful">Accelerometer</paper-button>
+                <paper-button id="connectButton" onclick="location.href='stepsensor.html';" raised class="colorful">Schrittzähler</paper-button>
+                <paper-button id="connectButton" onclick="location.href='glucose.html';" raised class="colorful">Blutzucker</paper-button>
+      </div>
+    </div>
+
+  <script>
+    // Service worker
+    if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                    navigator.serviceWorker.register('sw.js').then(function(registration) {
+                    }, function(err) {
+                    console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+    }
+  </script>
+</body>
+</html>
