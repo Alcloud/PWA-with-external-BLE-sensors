@@ -1,13 +1,13 @@
-// connects to Mi Band and gets name value and amount of steps
+// connects to Glucose Meter and gets name value and amount of blood sugar
 document.querySelector('#connect').addEventListener('click', function() {
-  MIband.connect()
+  glucoseMeter.connect()
   .then(() => { 
-    console.log(MIband.device);
+    console.log(glucoseMeter.device);
     document.querySelector('#state').classList.remove('connecting');
     document.querySelector('#state').classList.add('connected');
-    return MIband.getDeviceName().then(handleDeviceName)
-    .then(() => MIband.getInitialSteps().then(handleInitialSteps))
-    .then(() => MIband.startNotificationsSteps().then(handleSteps));
+    return glucoseMeter.getDeviceName().then(handleDeviceName)
+    .then(() => glucoseMeter.getInitialGlucose().then(handleInitialGlucose))
+    .then(() => glucoseMeter.startNotificationsGlucose().then(handleGlucose));
   })  
   .catch(error => {
     console.error('Argh!', error);
@@ -18,16 +18,16 @@ function handleDeviceName(deviceName) {
   document.querySelector('.deviceName').value = "Device Name: " + deviceName;
 }
 
-function handleInitialSteps(steps) {
-  document.querySelector('.steps-amount').value = steps + " mol/L";
-  console.log('StepsMAIN: ' + steps);
+function handleInitialGlucose(glucose) {
+  document.querySelector('.glucose-amount').value = glucose + " mol/L";
+  console.log('GlucoseMAIN: ' + glucose);
 }
 
-function handleSteps(steps) {
-  steps.addEventListener('characteristicvaluechanged', event => {
-    var stepsMeasurement = MIband.getSteps(event.target.value);
-    document.querySelector('.steps-amount').value = stepsMeasurement;
-    console.log('stepsMeasurementMAIN: ' + stepsMeasurement);
+function handleGlucose(glucose) {
+  glucose.addEventListener('characteristicvaluechanged', event => {
+    var glucoseMeasurement = glucoseMeter.getGlucose(event.target.value);
+    document.querySelector('.glucose-amount').value = glucoseMeasurement;
+    console.log('glucoseMeasurementMAIN: ' + glucoseMeasurement);
   })
 }
 

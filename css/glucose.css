@@ -60,7 +60,7 @@ body.connecting #loading {
   border-radius: 50%;
   background-color: #00BCD4; 
 }
-.steps-amount{
+.glucose-amount{
   font-family: Roboto;
   background: transparent;
   border: 0;

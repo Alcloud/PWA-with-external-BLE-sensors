@@ -1,9 +1,9 @@
 (function() {
   'use strict';
 
-  const MI_REALTIME_STEPS_CHAR = '00002a08-0000-1000-8000-00805f9b34fb'; //00002a51-0000-1000-8000-00805f9b34fb Glucose
+  const GLUCOSE_CHAR = '00002a08-0000-1000-8000-00805f9b34fb'; //00002a51-0000-1000-8000-00805f9b34fb Glucose
 
-  class MIband {
+  class GlucoseMeter {
     constructor() {
       this.device = null;
       this.server = null;
@@ -24,7 +24,7 @@
         return Promise.all([
           server.getPrimaryService(0x1808).then(service => {
             return Promise.all([
-              this.cacheCharacteristic(service, MI_REALTIME_STEPS_CHAR),
+              this.cacheCharacteristic(service, GLUCOSE_CHAR),
             ])
           })
         ]);
@@ -49,22 +49,22 @@
       });
     }
 
-    getInitialSteps() {
-       return this.device.gatt.getPrimaryService(0x1808) //0x1808
-      .then(service => service.getCharacteristic(MI_REALTIME_STEPS_CHAR))
+    getInitialGlucose() {
+       return this.device.gatt.getPrimaryService(0x1808)
+      .then(service => service.getCharacteristic(GLUCOSE_CHAR))
       .then(characteristic => characteristic.readValue())
       .then(data => data.getUint16(3, /*littleEndian=*/true));
     }
 
-    getSteps(value) {
+    getGlucose(value) {
       value = value.buffer ? value : new DataView(value);
-      let steps = value.getUint8(0);
-      console.log('flags: ' + steps);
-      return steps;
+      let glucose = value.getUint8(0);
+      console.log('flags: ' + glucose);
+      return glucose;
     }
 
-    startNotificationsSteps() {
-      return this.startNotifications(MI_REALTIME_STEPS_CHAR);
+    startNotificationsGlucose() {
+      return this.startNotifications(GLUCOSE_CHAR);
     }
 
     startNotifications(characteristicUuid) {
@@ -80,9 +80,8 @@
           this._characteristics.set(characteristicUuid, characteristic);
       });
     }
-
   }
 
-  window.MIband = new MIband();
+  window.glucoseMeter = new GlucoseMeter();
 
 })();

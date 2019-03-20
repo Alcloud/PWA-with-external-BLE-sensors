@@ -3,7 +3,7 @@
 
   const REALTIME_STEPS_CHAR = '00002a53-0000-1000-8000-00805f9b34fb'; 
 
-  class HeartRateSensor {
+  class Stepcounter {
     constructor() {
       this.device = null;
       this.server = null;
@@ -29,13 +29,13 @@
     }
 
     /* Steps Rate Service */
-    startNotificationsHeartRateMeasurement() {
+    startNotificationsStepRateMeasurement() {
       return this._startNotifications(REALTIME_STEPS_CHAR);
     }
-    stopNotificationsHeartRateMeasurement() {
+    stopNotificationsStepRateMeasurement() {
       return this._stopNotifications(REALTIME_STEPS_CHAR);
     }
-    parseHeartRate(value) {
+    parseStepRate(value) {
       // In Chrome 50+, a DataView is returned instead of an ArrayBuffer.
       value = value.buffer ? value : new DataView(value);
       let flags = value.getUint8(0);
@@ -43,8 +43,8 @@
       let rate16Bits = flags & 0x1;
       let result = {};
 
-      result.heartRate = value.getUint32(6, /*littleEndian=*/true);
-      console.log('Total Distance: ' + result.heartRate);
+      result.stepRate = value.getUint32(6, /*littleEndian=*/true);
+      console.log('Total Distance: ' + result.stepRate);
       result.energyExpended = value.getUint16(1, /*littleEndian=*/true);
       console.log('Instantaneous Speed: ' + result.energyExpended);
 
@@ -89,6 +89,6 @@
     }
   }
 
-  window.heartRateSensor = new HeartRateSensor();
+  window.stepcounter = new Stepcounter();
 
 })();
