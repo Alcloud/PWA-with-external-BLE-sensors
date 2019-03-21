@@ -4,3 +4,6 @@ Currently, this project implements two devices: Stepcounter and Accu-Chek blood 
 
 # Technology
 For the transfer of data between BLE devices and the web application [Web Bluetooth](https://webbluetoothcg.github.io/web-bluetooth/) is used.
+
+# Test
+You can test it [here](https://my-health-notebook-iteration-3.firebaseapp.com)
