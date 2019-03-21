@@ -1,4 +1,4 @@
-const CACHE_NAME = "punchmeter";
+const CACHE_NAME = "my_health_notebook";
 const CACHE_VERSION = 1;
 
 self.addEventListener('install', event => {
@@ -8,12 +8,21 @@ self.addEventListener('install', event => {
         'index.html',
         'accelerometer.html',
         'notebook.html',
+        'stepsensor.html',
+        'glucose.html',
         'sw.js',
         'gauge/gauge.js',
-        'app.js',
-        'notebook.js',
-        'styles.css',
-        'style.css',
+        'js/accelerometerApp.js',
+        'js/notebook.js',
+        'js/glucoseApp.js',
+        'js/glucose.js',
+        'js/stepcounterApp.js',
+        'js/stepcounter.js',
+        'css/styles.css',
+        'css/accelerometer.css',
+        'css/glucose.css',
+        'css/notebook.css',
+        'css/stepsensor.css',
         'images/punchometer.jpg'
       ]);
     })
