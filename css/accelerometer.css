@@ -56,7 +56,7 @@ body {
   100% { transform:  translate(0px,-200%); }
 }
 
-.game {
+.screen {
     width: 90%;
     height: 100%;
     position: absolute;

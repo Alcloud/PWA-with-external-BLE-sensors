@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  const GLUCOSE_CHAR = '00002a08-0000-1000-8000-00805f9b34fb'; //00002a51-0000-1000-8000-00805f9b34fb Glucose
+  const GLUCOSE_CHAR = '00002a51-0000-1000-8000-00805f9b34fb'; //00002a51-0000-1000-8000-00805f9b34fb Glucose
 
   class GlucoseMeter {
     constructor() {

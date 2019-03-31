@@ -1,5 +1,5 @@
 var audioContext = new AudioContext();
-var game_text = null;
+var screen_text = null;
 var measurement = null;
 var gauge = null;
 var acl = null;
@@ -106,10 +106,10 @@ class MaxSpeedCalculator {
 
 }
 
-function setGameText(text) {
-  game_text.innerText = text;
-  game_text.style.display="none";
-  game_text.style.display="block";
+function setScreenText(text) {
+  screen_text.innerText = text;
+  screen_text.style.display="none";
+  screen_text.style.display="block";
 }
 
 function setMeasurement(val) {
@@ -140,7 +140,7 @@ function setToInitialState() {
       shaking = false;
       acl.removeEventListener('reading', onreading);
       setMeasurement(0);
-      setGameText("GO!");
+      setScreenText("GO!");
       speedCalculator.start();
     }
   }
@@ -150,7 +150,7 @@ function setToInitialState() {
 
 function onresult() {
   setMeasurement(speedCalculator.result);
-  setGameText(getQuote(speedCalculator.result) + " Schütteln, um es erneut zu versuchen!");
+  setScreenText(getQuote(speedCalculator.result) + " Schütteln, um es erneut zu versuchen!");
   setTimeout(setToInitialState, 1000);
 }
 
@@ -218,18 +218,19 @@ function main() {
   gauge.setMinValue(0);  // Prefer setter over gauge.minValue = 0
   gauge.animationSpeed = 32; // set animation speed (32 is default value)
 
-  // Show game text element
-  game_text = document.getElementById("game_text");
+  // Show text element
+  screen_text = document.getElementById("screen_text");
   measurement = document.getElementById("measurement");
-  setGameText(game_text.innerText);
+  setScreenText(screen_text.innerText);
   setMeasurement(0);
+  
   function startApp() {
     acl = new LinearAccelerationSensor({frequency: 60});
     speedCalculator = new MaxSpeedCalculator(acl, onresult, generateKickSound);
 
     acl.addEventListener('activate', setToInitialState);
     acl.addEventListener('error', error => {
-       setGameText("Cannot fetch data from sensor due to an error.");
+      setScreenText("Cannot fetch data from sensor due to an error.");
     });
     acl.start();
   }
@@ -237,7 +238,7 @@ function main() {
   if ('LinearAccelerationSensor' in window) {
     navigator.permissions.query({ name: "accelerometer" }).then(result => {
       if (result.state != 'granted') {
-        setGameText("Leider können wir nicht auf Sensoren auf Ihrem Gerät zugreifen.");
+        setScreenText("Leider können wir nicht auf Sensoren auf Ihrem Gerät zugreifen.");
         return;
       }
       startApp();
@@ -246,7 +247,7 @@ function main() {
       startApp();
     });
   } else {
-    setGameText("Dein Browser unterstutzt die Sensors nicht.");
+    setScreenText("Dein Browser unterstutzt die Sensors nicht.");
     setMeasurement(0);
   }
 }
