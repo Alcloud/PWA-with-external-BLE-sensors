@@ -1,5 +1,5 @@
 # PWA-with-external-BLE-sensors
-My Health Notebook is a telemedical progressive web app, that send and recieved data from external BLE sensors.
+My Health Notebook is a telemedical progressive web app, that send and received data from external BLE sensors.
 Currently, this project implements two devices: Stepcounter and Accu-Chek blood sugar meter.
 
 # Technology
